@@ -2,37 +2,34 @@ import React, { Component } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import "chart.js/auto";
 
+// const options = {
+//   responsive: true,
+//   plugins: {
+//     legend: {
+//       display: true,
+//       position: "right",
+//     },
+//     title: {
+//       display: this.props.displayTitle,
+//       text: "Largest cities in Massachusetts",
+//       fontSize: 25,
+//     },
+//   },
+// };
 class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartData: {
-        labels: [
-          "Boston",
-          "Worcester",
-          "Springfield",
-          "Lowell",
-          "Cambrigde",
-          "New Bedford",
-        ],
-        datasets: [
-          {
-            label: "Population",
-            data: [615673, 181045, 153566, 106591, 105162, 95072],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)",
-            ],
-          },
-        ],
-      },
+      chartData: props.chartData,
     };
   }
+
+  static defaultProps = {
+    displayTitle: true,
+    displayLegend: true,
+    legendPosition: "right",
+    location: "City",
+  };
 
   render() {
     return (
@@ -40,13 +37,48 @@ class Chart extends Component {
         <Bar
           data={this.state.chartData}
           options={{
-            title: {
-              display: true,
-              text: "Largest cities in Massachusetts",
+            plugins: {
+              title: {
+                display: this.props.displayTitle,
+                text: "Largest cities in " + this.props.location,
+                fontSize: "25",
+              },
+              legend: {
+                display: this.props.displayLegend,
+                position: this.props.legendPosition,
+              },
             },
-            legend: {
-              display: true,
-              position: "right",
+          }}
+        />
+        <Pie
+          data={this.state.chartData}
+          options={{
+            plugins: {
+              title: {
+                display: this.props.displayTitle,
+                text: "Largest cities in " + this.props.location,
+                fontSize: "25",
+              },
+              legend: {
+                display: this.props.displayLegend,
+                position: this.props.legendPosition,
+              },
+            },
+          }}
+        />
+        <Line
+          data={this.state.chartData}
+          options={{
+            plugins: {
+              title: {
+                display: this.props.displayTitle,
+                text: "Largest cities in " + this.props.location,
+                fontSize: "25",
+              },
+              legend: {
+                display: this.props.displayLegend,
+                position: this.props.legendPosition,
+              },
             },
           }}
         />
